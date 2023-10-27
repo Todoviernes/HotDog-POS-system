@@ -1,5 +1,6 @@
 from django.db import models
-from users.models import User, SupplyStaff
+from users.models import SupplyStaff, User
+
 
 class HotDogStand(models.Model):
     operator = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -7,8 +8,10 @@ class HotDogStand(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
 
+
 class InventoryItem(models.Model):
     name = models.CharField(max_length=255)
+
 
 class Inventory(models.Model):
     hotdog_stand = models.ForeignKey(HotDogStand, on_delete=models.CASCADE)
@@ -19,15 +22,18 @@ class Inventory(models.Model):
     def is_below_threshold(self):
         return self.quantity < self.threshold
 
+
 class Sale(models.Model):
     hotdog_stand = models.ForeignKey(HotDogStand, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
+
 
 class SaleItem(models.Model):
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
     inventory_item = models.ForeignKey(InventoryItem, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=7, decimal_places=2)
+
 
 class Discount(models.Model):
     name = models.CharField(max_length=255)

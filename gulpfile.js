@@ -99,16 +99,16 @@ function imgCompression() {
   return src(`${paths.images}/*`)
     .pipe(imagemin()) // Compresses PNG, JPEG, GIF and SVG images
     .pipe(dest(paths.images));
-}// Run django server
+} // Run django server
 function asyncRunServer() {
   const cmd = spawn(
     'gunicorn',
     ['config.asgi', '-k', 'uvicorn.workers.UvicornWorker', '--reload'],
-    {stdio: 'inherit'},
+    { stdio: 'inherit' },
   );
   cmd.on('close', function (code) {
     console.log('gunicorn exited with code ' + code);
-  })
+  });
 }
 
 // Browser sync server for live reload
