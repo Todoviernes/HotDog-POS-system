@@ -1,40 +1,28 @@
-from django.db import models
-from users.models import SupplyStaff, User
+from django.contrib import admin
+from pos.hotdog_stands.models import HotDogStand, InventoryItem, Inventory, Sale, SaleItem, Discount
 
+class InventoryInline(admin.TabularInline):
+    model = Inventory
+    extra = 1
+    fields = ['item', 'quantity', 'threshold']
 
-class HotDogStand(models.Model):
-    operator = models.ForeignKey(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=255)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+class SaleItemInline(admin.TabularInline):
+    model = SaleItem
+    extra = 1
+    fields = ['inventory_item', 'quantity', 'price']
 
+class HotDogStandAdmin(admin.ModelAdmin):
+    list_display = ['id', 'operator', 'location']
+    inlines = [InventoryInline]
 
-class InventoryItem(models.Model):
-    name = models.CharField(max_length=255)
+class SaleAdmin(admin.ModelAdmin):
+    list_display = ['id', 'hotdog_stand', 'time']
+    inlines = [SaleItemInline]
 
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'percentage']
 
-class Inventory(models.Model):
-    hotdog_stand = models.ForeignKey(HotDogStand, on_delete=models.CASCADE)
-    item = models.ForeignKey(InventoryItem, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
-    threshold = models.PositiveIntegerField()
-
-    def is_below_threshold(self):
-        return self.quantity < self.threshold
-
-
-class Sale(models.Model):
-    hotdog_stand = models.ForeignKey(HotDogStand, on_delete=models.CASCADE)
-    time = models.DateTimeField(auto_now_add=True)
-
-
-class SaleItem(models.Model):
-    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    inventory_item = models.ForeignKey(InventoryItem, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-
-
-class Discount(models.Model):
-    name = models.CharField(max_length=255)
-    percentage = models.DecimalField(max_digits=5, decimal_places=2)
+admin.site.register(HotDogStand, HotDogStandAdmin)
+admin.site.register(InventoryItem)
+admin.site.register(Sale, SaleAdmin)
+admin.site.register(Discount, DiscountAdmin)

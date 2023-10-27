@@ -36,6 +36,5 @@ class User(AbstractUser):
         """
         return reverse("users:detail", kwargs={"pk": self.id})
 
-
 class SupplyStaff(User):
     vehicle = CharField(max_length=100)
