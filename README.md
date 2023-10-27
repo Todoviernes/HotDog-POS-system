@@ -1,11 +1,35 @@
-# pos
-
-Point of sale
-
+# Hot Diggety Dog Point-of-Sale System
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 License: MIT
+
+## Overview
+The "Hot Diggety Dog" app is a Django-based point-of-sale system designed for local hot dog stand merchants. It provides functionality to manage hot dog stand inventory, process sales, apply discounts, track sales by time and location, and notify both customers and mobile inventory-management staff.
+
+
+### Features
+1. Inventory Management: Manage inventory items and associate them with individual hot dog stands. Set thresholds for inventory items to trigger notifications for restocking.
+2. Sales Processing: Process sales by adding items, applying discounts, and capturing sales time and location.
+Dynamic Discounting: Create and manage a range of discounts applicable to sales.
+3. Location-Based Notifications: Notify customers via social media integrations when a hot dog stand is nearby based on geolocation. Notify supply staff when an inventory item's quantity falls below a defined threshold.
+4. Django Admin Integration: Leverage the power of Django admin to manage stands, inventory, and sales seamlessly.
+
+
+### Users
+1. Stand Operators: There are approximately 50 hot dog stand operators. They can manage sales and check their inventory.
+2. Supply Staff: Mobile inventory-management staff that drive to locations with supplies. They receive notifications for restocking.
+3. Customers: Thousands of local area residents. They receive notifications when a hot dog stand is nearby.
+
+## Technical Overview
+The application has been designed with Domain-Driven Design principles. It uses Django's Class-Based Views for the front-end logic and integrates seamlessly with Django's admin for back-end management.
+
+### Architecture Diagram
+
+[![](https://mermaid.ink/img/pako:eNpdUF9PwjAQ_yrNPQ-y2a6MPZgwZsweiEaFBzcezrXAdGvJWiJI-O52G5rovdzd718ud4ZSCwkxbFvc78hLUijiapnlSyNbkikr2w2Wck1Go1syT1b5vEZjRgkaKciqkp9mPVgc12sWLq82AzbMPZwmeYoW35zvakiTnnh4WuTpO6qt7sZ_YTPRVOqH7perYPaY5XdHd5zCmjzrsnJtIUWFHTMcu8wG6b3Undq1WpdoK63-asCDRrYNVsK94dx5CrA72cgCYjcKbD8KKNTF6fBg9fNJlRBvsDbSg8NeoJVphe59zS-6R_WqtdttexhWiM9whPgmpOPplFEa0YAxFvDIgxPEgR-MGQsjh3Ma-nzKLx589Qn-eEJ5yPgkZBGd-JQHl28KfoGE?type=png)](https://mermaid.live/edit#pako:eNpdUF9PwjAQ_yrNPQ-y2a6MPZgwZsweiEaFBzcezrXAdGvJWiJI-O52G5rovdzd718ud4ZSCwkxbFvc78hLUijiapnlSyNbkikr2w2Wck1Go1syT1b5vEZjRgkaKciqkp9mPVgc12sWLq82AzbMPZwmeYoW35zvakiTnnh4WuTpO6qt7sZ_YTPRVOqH7perYPaY5XdHd5zCmjzrsnJtIUWFHTMcu8wG6b3Undq1WpdoK63-asCDRrYNVsK94dx5CrA72cgCYjcKbD8KKNTF6fBg9fNJlRBvsDbSg8NeoJVphe59zS-6R_WqtdttexhWiM9whPgmpOPplFEa0YAxFvDIgxPEgR-MGQsjh3Ma-nzKLx589Qn-eEJ5yPgkZBGd-JQHl28KfoGE)
+### Database Design
+
+[![](https://mermaid.ink/img/pako:eNqNVMuOmzAU_RXLq1ZNolAek6DRrLLorLqIuqkijTz2BayCzdhmWprm33sDKeAMGZWVfXzu8bkPfKRcC6Ap5SWzdidZblh1UAS_bxYMuf-zXJK9Y0p8rcEwp82bw6auyxYpWdYffdFup_MuhlwHk5Tobgl2lvyoXkEhr0ViwS6cEVwuH8bdo4MKaVwrx6Sa19uzEpBjgGsjLpQOOyudF7Miw8HcfQbK0f6gtZOW60Y5JDCsh4RZ75NaIVFpJzNkkg8yI89Q6p_EFQZsoUvxcS6dh77sV5EKmHluMaAP6RrZE489cv4-EaiYLKcApiFdI8DDtMon4MkX9VvpqdsaOFriBG2VwpIMCfrCtPNik1p4Uq9QSF7OO5jW4-gb55iOVlNMexN7pTQ2xtOR2OTp_qVhCsvUTrGhSe8Ld_PiiStWedWujeQ3Kn2eKy-20E7o_MmeU_fMyOq2xFsL8p-7p__J9LbBYd7fTxAMx-tYPorQBa3A4CwKfHS64AN1BWAcTXEpmPlxoAd1Qh5rnN63itM0Y6WFBW1qgb_e5ZEa0Jqp71rj3pmm39L0SH_R9HMcrrbbKAw3YRBFUZBsFrSlabAOVlEUbxBPwnidbJPTgv7uFNaruzCJo-QuTuJtHGyi8PQXIzeSFA?type=png)](https://mermaid.live/edit#pako:eNqNVMuOmzAU_RXLq1ZNolAek6DRrLLorLqIuqkijTz2BayCzdhmWprm33sDKeAMGZWVfXzu8bkPfKRcC6Ap5SWzdidZblh1UAS_bxYMuf-zXJK9Y0p8rcEwp82bw6auyxYpWdYffdFup_MuhlwHk5Tobgl2lvyoXkEhr0ViwS6cEVwuH8bdo4MKaVwrx6Sa19uzEpBjgGsjLpQOOyudF7Miw8HcfQbK0f6gtZOW60Y5JDCsh4RZ75NaIVFpJzNkkg8yI89Q6p_EFQZsoUvxcS6dh77sV5EKmHluMaAP6RrZE489cv4-EaiYLKcApiFdI8DDtMon4MkX9VvpqdsaOFriBG2VwpIMCfrCtPNik1p4Uq9QSF7OO5jW4-gb55iOVlNMexN7pTQ2xtOR2OTp_qVhCsvUTrGhSe8Ld_PiiStWedWujeQ3Kn2eKy-20E7o_MmeU_fMyOq2xFsL8p-7p__J9LbBYd7fTxAMx-tYPorQBa3A4CwKfHS64AN1BWAcTXEpmPlxoAd1Qh5rnN63itM0Y6WFBW1qgb_e5ZEa0Jqp71rj3pmm39L0SH_R9HMcrrbbKAw3YRBFUZBsFrSlabAOVlEUbxBPwnidbJPTgv7uFNaruzCJo-QuTuJtHGyi8PQXIzeSFA)
 
 ## Settings
 
@@ -19,7 +43,7 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 - To create a **superuser account**, use this command:
 
-      $ python manage.py createsuperuser
+      $ docker-compose -f local.yml run --rm django python manage.py createsuperuser
 
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
